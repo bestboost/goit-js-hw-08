@@ -27,3 +27,37 @@
 
 // Добавь в проект бибилотеку lodash.throttle и сделай так, чтобы время воспроизведения обновлялось в хранилище не чаще чем раз в секунду.
 
+import Player from '@vimeo/player';
+
+const iframe = document.querySelector('iframe');
+const videoId = iframe.id;
+console.log(videoId);
+
+
+
+// const player = new Player('handstick', {
+//     id: videoId ,
+//     width: 640
+// });
+
+// player.on('play', function() {
+//     console.log('played the video!');
+// });
+
+// const onPlay = function(data) {
+//     // data is an object containing properties specific to that event
+// };
+
+// player.on('play', onPlay);
+
+// // {
+// //     duration: 61.857
+// //     percent: 0.049
+// //     seconds: 3.034
+// // }
+
+// // player.on('timeupdate', function(data) {
+// //         duration: 61.857
+// //         percent: 0.049
+// //         seconds: 3.034
+// // });
