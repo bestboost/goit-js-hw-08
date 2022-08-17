@@ -12,12 +12,11 @@
 // ></iframe>
 // Выполняй это задание в файлах 02-video.html и 02-video.js. Разбей его на несколько подзадач:
 
-// Ознакомься с документацией библиотеки Vimeo плеера.
 
-// Добавь библиотеку как зависимость проекта через npm.
 
-// Инициализируй плеер в файле скрипта как это описано в секции pre-existing player, но учти что у тебя плеер добавлен как npm пакет,
-// а не через CDN.
+
+
+
 
 // Разбери документацию метода on() и начни отслеживать событие timeupdate - обновление времени воспроизведения.
 
@@ -30,34 +29,25 @@
 import Player from '@vimeo/player';
 
 const iframe = document.querySelector('iframe');
-const videoId = iframe.id;
-console.log(videoId);
+const player = new Player(iframe);
+
+player.on('play', function() {
+    console.log('played the video!');
+});
+
+const onPlay = function(timeupdate) {
+    // data is an object containing properties specific to that event
+    console.log(timeupdate)
+ 
+   
+};
+
+player.on('play', onPlay);
+
+
+localStorage.setItem("videoplayer-current-time", onPlay)
 
 
 
-// const player = new Player('handstick', {
-//     id: videoId ,
-//     width: 640
-// });
 
-// player.on('play', function() {
-//     console.log('played the video!');
-// });
 
-// const onPlay = function(data) {
-//     // data is an object containing properties specific to that event
-// };
-
-// player.on('play', onPlay);
-
-// // {
-// //     duration: 61.857
-// //     percent: 0.049
-// //     seconds: 3.034
-// // }
-
-// // player.on('timeupdate', function(data) {
-// //         duration: 61.857
-// //         percent: 0.049
-// //         seconds: 3.034
-// // });
