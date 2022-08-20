@@ -24,11 +24,10 @@ const form = document.querySelector('.feedback-form');
 const email = document.querySelector('[name="email"]');
 const message = document.querySelector('[name="message"]');
 
-let inputData = {}
+const inputData = {}
 
 form.addEventListener('submit', onFormSubmit);
 form.addEventListener('input', throttle(onEmailInput, 500));
-// message.addEventListener('input', throttle(onEmailInput, 500));
   
 populateData();
 
@@ -37,45 +36,34 @@ function onFormSubmit(evt) {
 
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KAY);
-    console.log('send form')
 }
 
 function onEmailInput(evt) {
-    let inputData = {
-        email,
-        message,
-    }
-    
+
+    inputData[evt.target.name] = evt.target.value;
+   
    localStorage.setItem(STORAGE_KAY, JSON.stringify(inputData));
 
 }
 
-// function onTextareaInput(evt) {
-//     const message = evt.target.value;
-    
-// //    localStorage.setItem(STORAGE_KAY, message);
-// }
+
 
 function populateData() {
   
     const savedInputData = localStorage.getItem(STORAGE_KAY);
     const parsedInputData = JSON.parse(savedInputData);
-    console.log(parsedInputData)
-
-   
-    // if(savedEmail) {
-    //     console.log(savedEmail);
-    //     email.value = savedEmail;
-    // }
-
-    // if(savedMessage) {
-    //     console.log(savedMessage);
-    //     message.value = savedMessage;
-    // }
-
    
 
+     
+    if(parsedInputData) {
+ 
+        email.value = parsedInputData.email;
+         message.value = parsedInputData.message;
+    }
 }
+   
+
+
 
 
 
@@ -107,16 +95,16 @@ function populateData() {
 // }
 
 // function onEmailInput(evt) {
-//     const email = evt.target.value;
+//     const emailInput = evt.target.value;
 
-// //    localStorage.setItem(STORAGE_KAY, email);
+//    localStorage.setItem(STORAGE_KAY, emailInput);
 
 // }
 
 // function onTextareaInput(evt) {
 //     const message = evt.target.value;
     
-// //    localStorage.setItem(STORAGE_KAY, message);
+//    localStorage.setItem(STORAGE_KAY, message);
 // }
 
 // function populateData() {
