@@ -13,6 +13,8 @@ const onPlay = function({seconds}) {
 player.on('timeupdate', throttle(onPlay, 1000));
 
 const sevedTimeOnLocal = localStorage.getItem("videoplayer-current-time");
+localStorage.removeItem("videoplayer-current-time");
+console.log(localStorage.getItem("videoplayer-current-time"));
 
 player.setCurrentTime(sevedTimeOnLocal).then(function(sevedTimeOnLocal) {
     

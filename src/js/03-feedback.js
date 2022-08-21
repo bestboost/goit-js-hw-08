@@ -1,21 +1,3 @@
-// В HTML есть разметка формы. Напиши скрипт который будет сохранять значения полей в локальное хранилище когда пользователь 
-// что-то печатает.
-
-// <form class="feedback-form" autocomplete="off">
-//   <label>
-//     Email
-//     <input type="email" name="email" autofocus />
-//   </label>
-//   <label>
-//     Message
-//     <textarea name="message" rows="8"></textarea>
-//   </label>
-//   <button type="submit">Submit</button>
-// </form>
-
-// Отслеживай на форме событие input, и каждый раз записывай в локальное хранилище объект с полями email и message, в которых
-//  сохраняй текущие значения полей формы. Пусть ключом для хранилища будет строка "feedback-form-state".
-
 import throttle from 'lodash.throttle';
 
 const STORAGE_KAY = 'feedback-form-state';
@@ -24,103 +6,43 @@ const form = document.querySelector('.feedback-form');
 const email = document.querySelector('[name="email"]');
 const message = document.querySelector('[name="message"]');
 
-const inputData = {}
+const inputData = {  email: '', 
+message: '',};
 
 form.addEventListener('submit', onFormSubmit);
-form.addEventListener('input', throttle(onEmailInput, 500));
+form.addEventListener('input', throttle(onInput, 500));
   
 populateData();
 
 function onFormSubmit(evt) {
-    evt.preventDefault();
+    evt.preventDefault(); 
 
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KAY);
+
+    console.log(inputData);
 }
 
-function onEmailInput(evt) {
-
-    inputData[evt.target.name] = evt.target.value;
+function onInput(evt) {
+  
+   inputData[evt.target.name] = evt.target.value
    
    localStorage.setItem(STORAGE_KAY, JSON.stringify(inputData));
 
 }
-
-
 
 function populateData() {
   
     const savedInputData = localStorage.getItem(STORAGE_KAY);
     const parsedInputData = JSON.parse(savedInputData);
    
-
-     
-    if(parsedInputData) {
- 
-        email.value = parsedInputData.email;
+     if(parsedInputData) {
+        email.value = parsedInputData.email; 
          message.value = parsedInputData.message;
-    }
-}
-   
+      
+    } 
+        email.value = ''; 
+        message.value = '';
 
+};
 
-
-
-
-
-
-
-// import throttle from 'lodash.throttle';
-
-// const STORAGE_KAY = 'feedback-form-state';
-
-// const refs = {
-// form: document.querySelector('.feedback-form'),
-// email: document.querySelector('.feedback-form input'),
-// textarea: document.querySelector('.feedback-form textarea'),
-// };
-
-// refs.form.addEventListener('submit', onFormSubmit);
-// refs.email.addEventListener('input', throttle(onEmailInput, 500));
-// refs.textarea.addEventListener('input', throttle(onTextareaInput, 500));
-
-// populateData();
-
-// function onFormSubmit(evt) {
-//     evt.preventDefault();
-
-//     evt.currentTarget.reset();
-//     localStorage.removeItem(STORAGE_KAY);
-//     console.log('send form')
-// }
-
-// function onEmailInput(evt) {
-//     const emailInput = evt.target.value;
-
-//    localStorage.setItem(STORAGE_KAY, emailInput);
-
-// }
-
-// function onTextareaInput(evt) {
-//     const message = evt.target.value;
-    
-//    localStorage.setItem(STORAGE_KAY, message);
-// }
-
-// function populateData() {
-//     const savedEmail = localStorage.getItem(STORAGE_KAY);
-//     const savedMessage = localStorage.getItem(STORAGE_KAY);
-   
-//     if(savedEmail) {
-//         console.log(savedEmail);
-//         refs.email.value = savedEmail;
-//     }
-
-//     if(savedMessage) {
-//         console.log(savedMessage);
-//         refs.textarea.value = savedMessage;
-//     }
-
-   
-
-// }
