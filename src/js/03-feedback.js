@@ -1,21 +1,3 @@
-// В HTML есть разметка формы. Напиши скрипт который будет сохранять значения полей в локальное хранилище когда пользователь 
-// что-то печатает.
-
-// <form class="feedback-form" autocomplete="off">
-//   <label>
-//     Email
-//     <input type="email" name="email" autofocus />
-//   </label>
-//   <label>
-//     Message
-//     <textarea name="message" rows="8"></textarea>
-//   </label>
-//   <button type="submit">Submit</button>
-// </form>
-
-// Отслеживай на форме событие input, и каждый раз записывай в локальное хранилище объект с полями email и message, в которых
-//  сохраняй текущие значения полей формы. Пусть ключом для хранилища будет строка "feedback-form-state".
-
 import throttle from 'lodash.throttle';
 
 const STORAGE_KAY = 'feedback-form-state';
