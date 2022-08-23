@@ -14,12 +14,12 @@ form.addEventListener('submit', onFormSubmit);
 form.addEventListener('input', throttle(onInput, 500));
   
 populateData();
-console.log ('func', populateData())
 
 function onFormSubmit(evt) {
     evt.preventDefault(); 
     submitBtn.disabled = true;
-    console.log('отправляем форму', inputData);
+
+    console.log(inputData)
 
     evt.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
@@ -30,7 +30,7 @@ function onFormSubmit(evt) {
 function onInput(evt) {
 
    inputData[evt.target.name] = evt.target.value
-   console.log('Input', inputData)
+
    localStorage.setItem(STORAGE_KEY, JSON.stringify(inputData));
 
    if (email.value && message.value) {
