@@ -8,7 +8,7 @@ const message = document.querySelector('[name="message"]');
 const submitBtn = document.querySelector('button');
 submitBtn.disabled = true;
 
-const inputData =  {};
+const inputData = {email:'', message:''} || {};
 
 form.addEventListener('submit', onFormSubmit);
 form.addEventListener('input', throttle(onInput, 500));
