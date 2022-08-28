@@ -20,11 +20,9 @@ function onFormSubmit(evt) {
     submitBtn.disabled = true;
 
     console.log(inputData)
-
-    evt.currentTarget.reset();
+    
     localStorage.removeItem(STORAGE_KEY);
-
-  
+    evt.currentTarget.reset();
 }
 
 function onInput(evt) {
