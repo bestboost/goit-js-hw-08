@@ -6,7 +6,7 @@ const form = document.querySelector('.feedback-form');
 const email = document.querySelector('[name="email"]');
 const message = document.querySelector('[name="message"]');
 const submitBtn = document.querySelector('button');
-// submitBtn.disabled = true;
+submitBtn.disabled = true;
 
 const inputData = {email:'',  message:''} || {};
 
@@ -18,11 +18,11 @@ populateData();
 function onFormSubmit(evt) {
 
     evt.preventDefault(); 
-    // submitBtn.disabled = true;
+    submitBtn.disabled = true;
  
     console.log(inputData) 
     
-    // localStorage.removeItem(STORAGE_KEY);  problem is here!!!
+    localStorage.removeItem(STORAGE_KEY); 
     evt.currentTarget.reset();
   
 }
@@ -30,14 +30,12 @@ function onFormSubmit(evt) {
 function onInput(evt) {
    
    inputData[evt.target.name] = evt.target.value
-console.log(inputData)
+
    localStorage.setItem(STORAGE_KEY, JSON.stringify(inputData));
 
-//    if (email.value && message.value) {
-//     submitBtn.disabled = false;
-// };
-
-
+   if (email.value && message.value) {
+    submitBtn.disabled = false;
+};
 
 }
 
@@ -45,23 +43,22 @@ function populateData() {
   
     const savedInputData = localStorage.getItem(STORAGE_KEY);
     const parsedInputData = JSON.parse(savedInputData);
-   console.dir(parsedInputData)
-}
-    //  if(parsedInputData) {      problem is here!!!!
-    //     for (const key in parsedInputData){
   
-    //     if(parsedInputData.hasOwnProperty(key)) {
-          
-    //      email.value = parsedInputData.email ||  '';
-    //      message.value = parsedInputData.message ||  '';
-       
-    //     }
-    // } 
 
-    // if (email.value && message.value) {
-    //     submitBtn.disabled = false;
-    // };
+     if(parsedInputData) { 
+        for (const key in parsedInputData){
   
-// }
+        if(parsedInputData.hasOwnProperty(key)) {
+          
+         email.value = parsedInputData.email ||  '';
+         message.value = parsedInputData.message ||  '';
+       
+        }
+    } 
+
+    if (email.value && message.value) {
+        submitBtn.disabled = false;
+    };
+ }  
      
-// };
+};
