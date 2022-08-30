@@ -8,7 +8,7 @@ const message = document.querySelector('[name="message"]');
 const submitBtn = document.querySelector('button');
 submitBtn.disabled = true;
 
-const inputData = {email:'',  message:''} || {};
+let inputData = {email:'',  message:''} || {};
 
 form.addEventListener('submit', onFormSubmit);
 form.addEventListener('input', throttle(onInput, 500));
@@ -24,7 +24,7 @@ function onFormSubmit(evt) {
     
     localStorage.removeItem(STORAGE_KEY); 
     evt.currentTarget.reset();
-  
+    inputData = {};
 }
 
 function onInput(evt) {
@@ -41,9 +41,7 @@ function onInput(evt) {
 
 function populateData() {
   
-    const savedInputData = localStorage.getItem(STORAGE_KEY);
-    const parsedInputData = JSON.parse(savedInputData);
-  
+    const parsedInputData = JSON.parse(localStorage.getItem(STORAGE_KEY));
 
      if(parsedInputData) { 
         for (const key in parsedInputData){
