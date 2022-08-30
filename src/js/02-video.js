@@ -16,8 +16,7 @@ const sevedTimeOnLocal = localStorage.getItem("videoplayer-current-time");
 localStorage.removeItem("videoplayer-current-time");
 
 
-player.setCurrentTime(sevedTimeOnLocal)
-.then(function(seconds) {
+player.setCurrentTime(sevedTimeOnLocal).then(function(seconds) {
     
     player.off('play')
 }).catch(function(error) {
